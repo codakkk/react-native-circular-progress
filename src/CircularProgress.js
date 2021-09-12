@@ -49,6 +49,15 @@ export default class CircularProgress extends React.PureComponent {
     const radius = size / 2 - maxWidthCircle / 2 - padding / 2;
 
     const currentFillAngle = (arcSweepAngle * this.clampFill(fill)) / 100;
+    
+    const commodityPath = this.circlePath(
+      sizeWithPadding,
+      sizeWithPadding,
+      radius,
+      0,
+      arcSweepAngle
+    );
+
     const backgroundPath = this.circlePath(
       sizeWithPadding,
       sizeWithPadding,
@@ -73,7 +82,7 @@ export default class CircularProgress extends React.PureComponent {
 
     const offset = size - maxWidthCircle * 2;
 
-    const  c= {
+    const  c = {
       position: 'absolute',
       left: maxWidthCircle + padding / 2,
       top: maxWidthCircle + padding / 2,
@@ -105,8 +114,17 @@ export default class CircularProgress extends React.PureComponent {
         <Svg width={size + padding} height={size + padding}>
           <G rotation={rotation} originX={(size + padding) / 2} originY={(size + padding) / 2}>
             {backgroundColor && (
+              <>
               <Path
                 id="curve"
+                d={commodityPath}
+                stroke={backgroundColor}
+                strokeWidth={backgroundWidth || width}
+                strokeLinecap={lineCap}
+                strokeDasharray={strokeDasharrayBackground}
+                fill="transparent"
+              />
+              <Path
                 d={backgroundPath}
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
@@ -114,6 +132,7 @@ export default class CircularProgress extends React.PureComponent {
                 strokeDasharray={strokeDasharrayBackground}
                 fill="transparent"
               />
+              </>
             )}
             {fill > 0 && (
               <Path
