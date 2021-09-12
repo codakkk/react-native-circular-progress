@@ -73,32 +73,22 @@ export default class CircularProgress extends React.PureComponent {
 
     const offset = size - maxWidthCircle * 2;
 
+    const  c= {
+      position: 'absolute',
+      left: maxWidthCircle + padding / 2,
+      top: maxWidthCircle + padding / 2,
+      width: offset,
+      height: offset,
+      borderRadius: offset / 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+    };
+
     const localChildrenContainerStyle = {
-      ...{
-        position: 'absolute',
-        left: maxWidthCircle + padding / 2,
-        top: maxWidthCircle + padding / 2,
-        width: offset,
-        height: offset,
-        borderRadius: offset / 2,
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-      },
+      ...c,
       ...childrenContainerStyle,
-    }{
-        position: 'absolute',
-        left: maxWidthCircle + padding / 2,
-        top: maxWidthCircle + padding / 2,
-        width: offset,
-        height: offset,
-        borderRadius: offset / 2,
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-      },
-      ...childrenContainerStyle,
-    }
+    };
 
     const strokeDasharrayTint = dashedTint.gap > 0 ?
       Object.values(dashedTint)
@@ -145,4 +135,13 @@ export default class CircularProgress extends React.PureComponent {
 }
 
 
-
+CircularProgress.defaultProps = {
+  tintColor: 'black',
+  tintTransparency: true,
+  rotation: 90,
+  lineCap: 'butt',
+  arcSweepAngle: 360,
+  padding: 0,
+  dashedBackground: { width: 0, gap: 0 },
+  dashedTint: { width: 0, gap: 0 },
+};
