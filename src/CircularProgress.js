@@ -55,7 +55,7 @@ export default class CircularProgress extends React.PureComponent {
       sizeWithPadding,
       radius,
       0,
-      arcSweepAngle
+      90
     );
 
     const backgroundPath = this.circlePath(
@@ -118,7 +118,7 @@ export default class CircularProgress extends React.PureComponent {
               <Path
                 id="curve"
                 d={commodityPath}
-                stroke={'green'}
+                stroke="green"
                 strokeWidth={backgroundWidth || width}
                 strokeLinecap={lineCap}
                 strokeDasharray={strokeDasharrayBackground}
