@@ -55,7 +55,7 @@ export default class CircularProgress extends React.PureComponent {
       sizeWithPadding,
       radius,
       0,
-      90
+      360
     );
 
     const backgroundPath = this.circlePath(
