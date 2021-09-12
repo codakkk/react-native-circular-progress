@@ -54,8 +54,8 @@ export default class CircularProgress extends React.PureComponent {
       sizeWithPadding,
       sizeWithPadding,
       radius,
-      -180,
-      180
+      0,
+      360
     );
 
     const backgroundPath = this.circlePath(
@@ -115,6 +115,7 @@ export default class CircularProgress extends React.PureComponent {
           <G rotation={rotation} originX={(size + padding) / 2} originY={(size + padding) / 2}>
             {backgroundColor && (
               <>
+              
               <Path
                 id="curve"
                 d={backgroundPath}
