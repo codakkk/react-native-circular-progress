@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Animated, View } from 'react-native';
-import { Svg, Path, G } from 'react-native-svg';
+import { View } from 'react-native';
+import { G, Path, Svg, Text, TextPath } from 'react-native-svg';
 
 export default class CircularProgress extends React.PureComponent {
   polarToCartesian(centerX, centerY, radius, angleInDegrees) {
@@ -17,6 +16,14 @@ export default class CircularProgress extends React.PureComponent {
     var end = this.polarToCartesian(x, y, radius, startAngle);
     var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
     var d = ['M', start.x, start.y, 'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y];
+    return d.join(' ');
+  }
+
+  circleInnerPath(x, y, radius, startAngle, endAngle) {
+    var end = this.polarToCartesian(x, y, radius, endAngle * 0.9999);
+    var start = this.polarToCartesian(x, y, radius, startAngle);
+    var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+    var d = ['M', start.x, start.y, 'A', radius, radius, 0, largeArcFlag, 1, end.x, end.y];
     return d.join(' ');
   }
 
@@ -50,12 +57,12 @@ export default class CircularProgress extends React.PureComponent {
 
     const currentFillAngle = (arcSweepAngle * this.clampFill(fill)) / 100;
     
-    const commodityPath = this.circlePath(
+    const innerPath = this.circleInnerPath(
       sizeWithPadding,
       sizeWithPadding,
       radius,
-      0,
-      360
+      tintTransparency ? 0 : currentFillAngle,
+      arcSweepAngle
     );
 
     const backgroundPath = this.circlePath(
@@ -122,17 +129,15 @@ export default class CircularProgress extends React.PureComponent {
                 strokeLinecap={lineCap}
                 strokeDasharray={strokeDasharrayBackground}
                 fill="transparent"
-                transform="rotate(180)"
-              />
+                
+                />
               <Path
                 id="bgPath"
-                d={commodityPath}
-                stroke={'black'}
-                strokeWidth={backgroundWidth || width}
-                strokeLinecap={lineCap}
-                strokeDasharray={strokeDasharrayBackground}
+                d={innerPath}
+                stroke="transparent"
                 fill="transparent"
               />
+              
               </>
             )}
             {fill > 0 && (
