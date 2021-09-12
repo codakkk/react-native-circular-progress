@@ -117,14 +117,6 @@ export default class CircularProgress extends React.PureComponent {
               <>
               <Path
                 id="curve"
-                d={commodityPath}
-                stroke="transparent"
-                strokeWidth={backgroundWidth || width}
-                strokeLinecap={lineCap}
-                strokeDasharray={strokeDasharrayBackground}
-                fill="transparent"
-              />
-              <Path
                 d={backgroundPath}
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
