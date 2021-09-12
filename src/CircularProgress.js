@@ -86,6 +86,18 @@ export default class CircularProgress extends React.PureComponent {
         overflow: 'hidden',
       },
       ...childrenContainerStyle,
+    }{
+        position: 'absolute',
+        left: maxWidthCircle + padding / 2,
+        top: maxWidthCircle + padding / 2,
+        width: offset,
+        height: offset,
+        borderRadius: offset / 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+      },
+      ...childrenContainerStyle,
     }
 
     const strokeDasharrayTint = dashedTint.gap > 0 ?
@@ -104,6 +116,7 @@ export default class CircularProgress extends React.PureComponent {
           <G rotation={rotation} originX={(size + padding) / 2} originY={(size + padding) / 2}>
             {backgroundColor && (
               <Path
+                id="curve"
                 d={backgroundPath}
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
@@ -131,36 +144,5 @@ export default class CircularProgress extends React.PureComponent {
   }
 }
 
-CircularProgress.propTypes = {
-  style: PropTypes.object,
-  size: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.instanceOf(Animated.Value),
-  ]).isRequired,
-  fill: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
-  backgroundWidth: PropTypes.number,
-  tintColor: PropTypes.string,
-  tintTransparency: PropTypes.bool,
-  backgroundColor: PropTypes.string,
-  rotation: PropTypes.number,
-  lineCap: PropTypes.string,
-  arcSweepAngle: PropTypes.number,
-  children: PropTypes.func,
-  childrenContainerStyle: PropTypes.object,
-  padding: PropTypes.number,
-  renderCap: PropTypes.func,
-  dashedBackground: PropTypes.object,
-  dashedTint: PropTypes.object
-};
 
-CircularProgress.defaultProps = {
-  tintColor: 'black',
-  tintTransparency: true,
-  rotation: 90,
-  lineCap: 'butt',
-  arcSweepAngle: 360,
-  padding: 0,
-  dashedBackground: { width: 0, gap: 0 },
-  dashedTint: { width: 0, gap: 0 },
-};
+
