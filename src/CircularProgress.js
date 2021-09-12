@@ -108,16 +108,15 @@ export default class CircularProgress extends React.PureComponent {
       Object.values(dashedBackground)
       .map(value => parseInt(value))
       : null;
-
+    //
     return (
       <View style={style}>
         <Svg width={size + padding} height={size + padding}>
           <G rotation={rotation} originX={(size + padding) / 2} originY={(size + padding) / 2}>
             {backgroundColor && (
               <>
-              
               <Path
-                id="curve"
+                id="bgPath"
                 d={backgroundPath}
                 stroke={backgroundColor}
                 strokeWidth={backgroundWidth || width}
@@ -129,6 +128,7 @@ export default class CircularProgress extends React.PureComponent {
             )}
             {fill > 0 && (
               <Path
+                id="fillPath"
                 d={circlePath}
                 stroke={tintColor}
                 strokeWidth={width}
