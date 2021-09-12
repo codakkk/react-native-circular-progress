@@ -1,13 +1,13 @@
-declare module 'react-native-circular-progress' {
-  import * as React from 'react';
+declare module "react-native-circular-progress" {
+  import * as React from "react";
   import {
     Animated,
     Easing,
     EasingFunction,
     ViewPropTypes,
     StyleProp,
-    ViewStyle
-  } from 'react-native';
+    ViewStyle,
+  } from "react-native";
 
   export interface AnimatedCircularProgressProps {
     /**
@@ -84,7 +84,7 @@ declare module 'react-native-circular-progress' {
      * @type {('butt' | 'round' | 'square')}
      * @default 'butt'
      */
-    lineCap?: 'butt' | 'round' | 'square';
+    lineCap?: "butt" | "round" | "square";
 
     /**
      * Shape used at ends of progress line.
@@ -92,7 +92,7 @@ declare module 'react-native-circular-progress' {
      * @type {('butt' | 'round' | 'square')}
      * @default lineCap - which is 'butt'
      */
-    fillLineCap?: 'butt' | 'round' | 'square';
+    fillLineCap?: "butt" | "round" | "square";
 
     /**
      * If you don't want a full circle, specify the arc angle
@@ -170,6 +170,8 @@ declare module 'react-native-circular-progress' {
       center: { x: number; y: number };
     }) => React.ReactNode;
 
+    renderInner?: () => React.ReactNode;
+
     /**
      * Use dashed type for tint/progress line
      *
@@ -187,9 +189,7 @@ declare module 'react-native-circular-progress' {
     dashedBackground?: { width: number; gap: number };
   }
 
-  export class AnimatedCircularProgress extends React.Component<
-    AnimatedCircularProgressProps
-  > {
+  export class AnimatedCircularProgress extends React.Component<AnimatedCircularProgressProps> {
     /**
      * Animate the progress bar to a specific value
      *
@@ -197,7 +197,11 @@ declare module 'react-native-circular-progress' {
      * @param {number} duration
      * @param {Function} ease
      */
-    animate: (toVal: number, duration: number, ease?: EasingFunction) => Animated.CompositeAnimation;
+    animate: (
+      toVal: number,
+      duration: number,
+      ease?: EasingFunction
+    ) => Animated.CompositeAnimation;
 
     /**
      * Re-run animation with a specified prefill-value

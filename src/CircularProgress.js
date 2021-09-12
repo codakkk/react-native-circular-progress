@@ -47,6 +47,7 @@ export default class CircularProgress extends React.PureComponent {
       childrenContainerStyle,
       padding,
       renderCap,
+      renderInner,
       dashedBackground,
       dashedTint
     } = this.props;
@@ -86,6 +87,7 @@ export default class CircularProgress extends React.PureComponent {
       currentFillAngle
     );
     const cap = this.props.renderCap ? this.props.renderCap({ center: coordinate }) : null;
+    const inner = this.props.renderInner ? this.props.renderInner() : null;
 
     const offset = size - maxWidthCircle * 2;
 
@@ -152,6 +154,7 @@ export default class CircularProgress extends React.PureComponent {
               />
             )}
             {cap}
+            {inner}
           </G>
         </Svg>
         {children && <View style={localChildrenContainerStyle}>{children(fill)}</View>}
